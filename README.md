@@ -1,0 +1,1 @@
+Repository for all the sources and data used for the analyses in semestral project of university course Veda o sieťach (Network Science). Project done during the 2025/2026 academic year at the Faculty of Mathematics, Physics and Informatics Comenius University, Bratislava.
