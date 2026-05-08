@@ -3,14 +3,13 @@
 \usepackage[T1]{fontenc}
 \usepackage[slovak]{babel}
 \usepackage{graphicx}
-\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black, plainpages=false, pdfpagelabels]{hyperref}
 \usepackage[margin=3cm,
             top=1.5cm,
             includeheadfoot,
             footskip=1cm]{geometry}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{hyperref}
 \usepackage{pbox}
 \usepackage{float}
 \usepackage{setspace}
@@ -61,11 +60,12 @@
   \end{center}
 \end{titlepage}
 
-\include{chapters/uvod.tex}
+\input{chapters/uvod}
 
 % tipujem nejakú kapitolu, ktorá spraví úvodné charakteristiky siete (mimo distance)
+\input{chapters/general}
 
-\include{chapters/layovers.tex}
+\input{chapters/layovers}
 
 % tipujem kapitolu o centralitách?
 
