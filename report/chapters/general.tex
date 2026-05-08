@@ -23,13 +23,6 @@ Tento výsledok potvrdzuje, že priamočiara dostupnosť medzi ľubovoľnými dv
 „riedkosti“ však sieť vykazuje vysokú mieru tranzitivity ($25.01\,\%$). To indikuje, že sieť nie je náhodná, ale je organizovaná do hustých klastrov
 – ak existuje spojenie z bodu A do B a z B do C, je $25\%$ šanca, že existuje aj priama linka A $\rightarrow$ C.
 
-\section*{Hierarchia vplyvu: Centrality a roly uzlov}
-Na hlbšie pochopenie vnútornej dynamiky siete aplikujeme súbor centralít, ktoré kvantifikujú významnosť uzlov z rôznych perspektív. Ich distribúcie vykazujú spoločný znak — charakteristický „ťažký chvost“ (\textit{heavy-tail}), čo dokazuje, že vplyv v sieti je koncentrovaný v malej skupine dominantných uzlov (Obrázok \ref{fig:degree_dist}).
-
-Jednotlivé metriky nám umožňujú kategorizovať letiská podľa ich špecifického prínosu. \textbf{Degree centrality} identifikuje primárne logistické centrá s najvyššou frekvenciou priamych spojení, kde dominuje \textbf{Frankfurt am Main}. Naopak, \textbf{Betweenness centrality} vyzdvihuje strategické križovatky, ktoré kontrolujú prepojenia medzi vzdialenými regiónmi. Uzly ako \textbf{Istanbul Atatürk} fungujú ako nevyhnutné geografické mosty, ktorých dôležitosť presahuje ich čistý počet linkových spojení.
-
-Prestiž a hierarchickú úroveň uzlov v rámci globálnej elity odrážajú \textbf{PageRank} a \textbf{Eigenvector centrality}. Tie potvrdzujú dominanciu letísk, ktoré sú napojené na iné vplyvné huby (napr. \textbf{Atlanta}, \textbf{London Heathrow}). Výnimkou v distribúcii je \textbf{Closeness centrality}, ktorá vykazuje nízku variabilitu hodnôt. Tento jav interpretujeme ako potvrdenie efektu „malého sveta“ — vďaka prítomnosti efektívnych hubov je topologická vzdialenosť (počet prestupov) k väčšine uzlov v obrej komponente relatívne malá, čo uľahčuje globálnu dostupnosť naprieč kontinentmi.
-
 \section*{Komponenty súvislosti a obria komponenta}
 Letecký svet v našom modeli nie je dokonale jednotný. Identifikovali sme celkovo $7$ komponentov súvislosti. Avšak analýza ich veľkosti ukazuje na
 existenciu tzv. \textbf{Obrieho komponentu} (\textit{Giant Component}), ktorý v sebe pohlcuje až $99.19\,\%$ všetkých letísk ($3188$ uzlov). 
