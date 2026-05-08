@@ -3,18 +3,22 @@
 \addcontentsline{toc}{chapter}{Úvod}
 
 Predkladaný report k projektu sa zaoberá problematikou analýzy logistickej siete letísk sveta.
-V celom projekte je analyzovaná orientovaná sieť, ktorej vrcholmi sú jednotlivé letiská sveta 
+V celom projekte je analyzovaná neorientovaná sieť, ktorej vrcholmi sú jednotlivé letiská sveta 
 a ohodnotené hrany sú letecké spojenia medzi jednotlivými letiskami. Ohodnotenie hrán zodpovedá vzdialenosti v kilometroch.
 
 Dataset obsahuje dovedna $3214$ letísk a $36 \> 907$ hrán. Dáta boli spracované na základe dát dostupných na stránke \texttt{openflights.org} \footnote{OpenFlights. Openflights: Airport and airline data. https://openflights.org/data.
 html, 2024. Accessed: 2026-04-09.}.
 
 V projekte sme sa postupne venovali viacerým otázkam, ktoré boli analyzované vybranými technikami sieťovej vedy.
-% Úvodné analýzy
+V prvom rade bola pozornosť venovaná základným charakteristikám siete, ako počty hrán a vrcholov, hustota grafu či rozdelenie stupňov vrcholov.
 
 V druhom rade sme sa venovali vzdialenostnej a prestupovej analýze -- aká je minimálne nutná vzdialenosť, resp. počet prestupov, na cestovanie medzi akoukoľvek dvojicou 
 letísk v datasete.
-% Tuto dopísať, čo sme zaujímavé robili ešte
+
+V neposlednom rade sme venovali pozornosť dôležitosti jednotlivých letísk v kontexte celej siete. Sieť sme analyzovali a interpretovali pomocou rôznych typov centralít.
+
+Nakoniec, priestor sme venovali aj akejsi krízovej analýze siete. Analyzovali sme existenciu mostov a artikulácií v sieti a ich vplyv na robustnosť siete pri ich nefunkčnosti.
+
 V poslednom rade, report vznikol v rámci riešenia semestrálneho projektu na predmete Veda o sieťach, v letnom semestri akademického roka 2025/2026.
 
 \begin{flushright}
