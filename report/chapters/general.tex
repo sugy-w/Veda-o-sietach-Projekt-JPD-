@@ -1,0 +1,67 @@
+\chapter[Topologická analýza siete \small{(Jakub Novotný)}]{Topologická analýza siete}
+Skúmanie globálnej leteckej dopravy vyžaduje prechod od vnímania izolovaných letov k pochopeniu komplexného systému prepojení. 
+Cieľom tejto kapitoly je formalizovať leteckú sieť ako matematický objekt a následne preskúmať jej topologickú anatómiu – od základnej hustoty
+prepojení až po identifikáciu strategických hubov, ktoré držia svetovú konektivitu pohromade.
+
+V našej analýze pracujeme s datasetom obsahujúcim $3214$ letísk (uzlov) a $36907$ pravidelných leteckých spojení (hrán). Skôr než sa zameriame
+na konkrétne trasy, musíme pochopiť, aký „tvar“ má táto sieť v abstraktnom grafovom priestore.
+
+\section*{Konštrukcia grafu a metodológia}
+Základným kameňom analýzy je definícia orientovaného grafu $G = (V, E)$. Množina vrcholov $V$ reprezentuje jednotlivé letiská, zatiaľ čo orientované
+hrany $E \subseteq V \times V$ predstavujú priame letecké linky. Pre výpočtovú efektivitu využívame maticovú reprezentáciu v podobe matice susednosti
+$\mathbf{A} \in \mathbb{R}^{3214 \times 3214}$, kde prvok $\mathbf{A}_{i,j}$ nadobúda hodnotu geografickej vzdialenosti medzi letiskami $i$ a $j$.
+
+\section*{Globálne charakteristiky a hustota siete}
+Prvým zistením pri pohľade na globálnu sieť je jej extrémna riedkosť. Hustota siete, definovaná ako pomer existujúcich hrán k počtu
+všetkých možných spojení v kompletnom grafe, dosahuje hodnotu približne $0.00357$. 
+
+\begin{equation}
+    Hustota = \frac{|E|}{|V|(|V|-1)} \approx 0.357 \%
+\end{equation}
+
+Tento výsledok potvrdzuje, že priamočiara dostupnosť medzi ľubovoľnými dvoma letiskami je v globálnom meradle výnimkou, nie pravidlom. Napriek tejto
+„riedkosti“ však sieť vykazuje vysokú mieru tranzitivity ($25.01\,\%$). To indikuje, že sieť nie je náhodná, ale je organizovaná do hustých klastrov
+– ak existuje spojenie z bodu A do B a z B do C, je $25\%$ šanca, že existuje aj priama linka A $\rightarrow$ C.
+
+\section*{Komponenty súvislosti a obria komponenta}
+Letecký svet v našom modeli nie je dokonale jednotný. Identifikovali sme celkovo $7$ komponentov súvislosti. Avšak analýza ich veľkosti ukazuje na
+existenciu tzv. \textbf{Obrieho komponentu} (\textit{Giant Component}), ktorý v sebe pohlcuje až $99.19\,\%$ všetkých letísk ($3188$ uzlov). 
+
+Vzhľadom na fakt, že obria komponenta pohlcuje drvivú väčšinu siete, zvyšných $0.81\,\%$ letísk sme pre účely vizualizácie agregovali do súhrnných
+geografických bodov. Tento prístup nám umožňuje identifikovať miesta štrukturálnej izolácie bez zbytočného zahltenia mapy detailmi lokálnych
+prepojení. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/components_map.png}
+    \caption{\centering Vizualizácia komponentov (okrem Obrieho komponentu) na mape.}
+    \label{fig:islands_map}
+\end{figure}
+
+
+Zistili sme, že izolácia v našom modeli nie je náhodná, ale viaže sa na špecifické geografické celky (Obrázok \ref{fig:islands_map}), ktoré sú v rámci
+globálnej logistickej siete odrezané od hlavných hubov. Ide predovšetkým o vnútroštátne siete v \textbf{Namíbii}, \textbf{Grónsku} či špecifické
+regionálne okruhy v \textbf{USA} a \textbf{Kanade}. Tieto body predstavujú výzvu pre globálnu integritu siete.
+
+\section*{Distribúcia stupňov a globálna hierarchia}
+Kľúčovým indikátorom charakteru reálnej siete je distribúcia stupňov jej vrcholov. Na rozdiel od náhodných grafov, kde majú uzly tendenciu mať podobný
+počet susedov, letecká sieť vykazuje extrémnu asymetriu. Priemerný stupeň vrchola v našej sieti je približne $22.97$, avšak medián na úrovni $6$
+naznačuje prítomnosť „ťažkého chvosta“ (\textit{heavy-tail}) v rozdelení.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/degree_loglog.png}
+    \caption{\centering Log-log zobrazenie distribúcie stupňov s KDE odhadom hustoty.}
+    \label{fig:degree_dist_analysis}
+\end{figure}
+
+V oblasti nízkych stupňov ($k < 10$) je možné pozorovať relatívne stabilnú hustotu (plateau), čo naznačuje, že regionálne letiská s malým počtom
+spojení tvoria v systéme robustnú a početne vyrovnanú základňu. Zlom nastáva približne pri stupni $k \approx 20$, odkiaľ distribúcia prechádza do
+výrazného poklesu vykazujúceho znaky mocninového zákona.
+
+Tento priebeh s „ťažkým chvostom“ (\textit{heavy-tail distribution}) potvrdzuje prítomnosť hierarchického usporiadania. Zatiaľ čo väčšina uzlov
+operuje v režime nízkej konektivity, pravý okraj grafu reprezentuje úzku elitu super-hubov. Extrémna variabilita a oscilácie v záverečnej časti grafu
+sú spôsobené nízkou hustotou dát v oblasti najvyšších stupňov, kde sa nachádzajú unikátne uzly ako \textbf{Frankfurt am Main} so stupňom $477$.
+Z topologického hľadiska toto rozdelenie indikuje sieť, ktorá je vysoko optimalizovaná na efektívny transport cez centrálne body, hoci za cenu
+zvýšenej citlivosti na stabilitu týchto kľúčových uzlov.
+
