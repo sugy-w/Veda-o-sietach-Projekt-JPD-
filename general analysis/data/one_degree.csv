@@ -1,0 +1,32 @@
+index,name,city,country,latitude,longitude,continent,degree,way
+471,Kalemie Airport,Kalemie,Congo (Kinshasa),-5.8755598068237305,29.25,Africa,1,in
+488,Tan Tan Airport,Tan Tan,Morocco,28.44820022583008,-11.161299705505373,Africa,1,out
+660,Filippos Airport,Kozani,Greece,40.28609848022461,21.84079933166504,Europe,1,in
+721,Ovda International Airport,Ovda,Israel,29.94029998779297,34.93579864501953,Asia,1,out
+1259,Teniente Coronel Luis a Mantilla Airport,Tulcan,Ecuador,0.8095059990882874,-77.70809936523438,South America,1,in
+1684,Cape Lisburne LRRS Airport,Cape Lisburne,United States,68.87509918,-166.1100006,North America,1,out
+1689,Tatalina LRRS Airport,Tatalina,United States,62.8944015503,-155.977005005,North America,1,out
+1693,Platinum Airport,Port Moller,United States,59.01139831542969,-161.82000732421875,North America,1,out
+1969,Massawa International Airport,Massawa,Eritrea,15.670000076293944,39.37009811401367,Africa,1,out
+2086,Utila Airport,Utila,Honduras,16.1131,-86.880302,North America,1,in
+2384,Lodja Airport,Lodja,Congo (Kinshasa),-3.4170000553131104,23.450000762939453,Africa,1,out
+2486,Jaqué Airport,Jaqué,Panama,7.51777982711792,-78.1572036743164,North America,1,out
+2505,Niue International Airport,Alofi,Niue,-19.079030990600582,-169.92559814453125,Oceania,1,out
+2758,Portland Airport,Portland,Australia,-38.31809997558594,141.4709930419922,Oceania,1,out
+2795,Dalanzadgad Airport,Dalanzadgad,Mongolia,43.59170150756836,104.43000030517578,Asia,1,in
+2892,Igiugig Airport,Igiugig,United States,59.32400131225586,-155.90199279785156,North America,1,out
+2894,Port Heiden Airport,Port Heiden,United States,56.95909881591797,-158.63299560546875,North America,1,out
+2909,Sinop Airport,Sinop,Turkey,42.015800476074,35.066398620605,Asia,1,out
+2975,Chuathbaluk Airport,Chuathbaluk,United States,61.579102,-159.216003,North America,1,in
+2978,Kasigluk Airport,Kasigluk,United States,60.87440109,-162.5240021,North America,1,in
+2994,Angoon Seaplane Base,Angoon,United States,57.503601,-134.585007,North America,1,in
+2995,Elfin Cove Seaplane Base,Elfin Cove,United States,58.1952018738,-136.347000122,North America,1,out
+3000,Perryville Airport,Perryville,United States,55.905998,-159.162993,North America,1,out
+3001,Pilot Point Airport,Pilot Point,United States,57.5803985596,-157.572006226,North America,1,in
+3004,Karluk Airport,Karluk,United States,57.5671005249,-154.449996948,North America,1,in
+3037,Sleetmute Airport,Sleetmute,United States,61.7005004883,-157.166000366,North America,1,out
+3039,Manley Hot Springs Airport,Manley Hot Springs,United States,64.99759674069999,-150.643997192,North America,1,in
+3053,Santana do Araguaia Airport,Santana do Araguaia,Brazil,-9.31997013092041,-50.32849884033203,South America,1,in
+3054,Breves Airport,Breves,Brazil,-1.6365300416946411,-50.44359970092773,South America,1,in
+3057,Santa Terezinha Airport,Santa Terezinha,Brazil,-10.4647216796875,-50.51861190795898,South America,1,out
+3127,São Félix do Xingu Airport,Sao Felix do Xingu,Brazil,-6.6413,-51.9523,South America,1,out
