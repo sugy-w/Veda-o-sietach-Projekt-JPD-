@@ -3,18 +3,20 @@
 \usepackage[T1]{fontenc}
 \usepackage[slovak]{babel}
 \usepackage{graphicx}
-\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black, plainpages=false, pdfpagelabels]{hyperref}
 \usepackage[margin=3cm,
             top=1.5cm,
             includeheadfoot,
             footskip=1cm]{geometry}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{hyperref}
 \usepackage{pbox}
 \usepackage{float}
 \usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{makecell}
 \usepackage{array}
+\usepackage{booktabs}
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\bigone}{\mbox{\normalfont\Large\bfseries 1}}
 \renewcommand{\thechapter}{\arabic{chapter}}
@@ -41,14 +43,13 @@
     \vspace{0.5cm}
     \LARGE
 
-    Marek Šugár
+    Marek Šugár (podiel $25 \%$)
 
-    Lucia Ganajová
+    Lucia Ganajová (podiel $25 \%$)
 
-    Tuan Dávid Nguyen Van
+    Jakub Novotný (podiel $25 \%$)
 
-    Jakub Novotný
-
+    Tuan Dávid Nguyen Van (podiel $25 \%$)
 
     \vfill
 
@@ -62,12 +63,15 @@
   \end{center}
 \end{titlepage}
 
-\include{chapters/uvod.tex}
+\input{chapters/uvod}
 
 % tipujem nejakú kapitolu, ktorá spraví úvodné charakteristiky siete (mimo distance)
+\input{chapters/general}
 
-\include{chapters/layovers.tex}
+\input{chapters/layovers}
 
 % tipujem kapitolu o centralitách?
+
+\include{chapters/network_robustness_and_structural_vulnerability.tex}
 
 \end{document}
