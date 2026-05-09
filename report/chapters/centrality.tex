@@ -1,0 +1,193 @@
+\chapter[Analýza centralít \small{(Tuan Dávid Nguyen Van)}]{Analýza centralít}
+\label{centrality}
+
+V tejto kapitole sa zameriame na analýzu centralít v sieti letísk. 
+Centrality nám pomáhajú identifikovať kľúčové letiská, ktoré zohrávajú dôležitú úlohu v štruktúre siete a môžu 
+byť kritické pre jej fungovanie. Budeme sa venovať rôznym typom centralít, ako sú degree centrality, betweenness 
+centrality, closeness centrality, eigenvector centrality.
+
+
+\section{Metodológia a technické spracovanie}
+
+Pre výpočet centralít sme využili knižnicu NetworkX, ktorá poskytuje efektívne implementácie pre rôzne typy centralít
+a knižnice Pandas pre štatistické spracovanie dát.
+
+\subsection{Normalizácia}
+Pre každý typ centrality sme vypočítali hodnoty pre všetky letiská v sieti a následne sme tieto hodnoty normalizovali, 
+aby sme mohli porovnávať letiská medzi sebou. Normalizácia bola vykonaná pomocou min-max škálovania, ktoré transformuje
+hodnoty centralít do rozsahu [0, 1] podľa vzorca:
+
+\begin{equation}
+    \text{Centrality}_{\text{norm}}(v) = \frac{\text{Centrality}(v) - \min(\text{Centrality})}{\max(\text{Centrality}) - \min(\text{Centrality})}
+\end{equation}
+
+Po normalizácii sme vytvorili nový DataFrame, ktorý obsahuje názvy letísk, ich centrality a ďalšie relevantné 
+informácie, ako je kontinent, na ktorom sa nachádzajú.
+
+
+\section{Definícia sieťových centralít}
+
+Na kvantifikáciu dôležitosti uzlov sme aplikovali päť základných metrík, pričom každá zachytáva odlišný aspekt sieťovej dominancie:
+
+\begin{itemize}
+
+    \item \textbf{Degree Centrality ($C_D$)} -- vyjadruje počet priamych spojení daného uzla. 
+    Letisko s vysokou degree centralitou disponuje veľkým počtom priamych letov na iné letiská.
+    
+    \item \textbf{Betweenness Centrality ($C_B$)} -- vyjadruje, cez koľko najkratších ciest medzi dvojicami uzlov prechádza daný uzol. 
+    Letisko s vysokou betweenness centralitou predstavuje významný tranzitný bod siete.
+    
+    \item \textbf{Closeness Centrality ($C_C$)} -- charakterizuje priemernú vzdialenosť uzla od všetkých ostatných uzlov v sieti. 
+    Letisko s vysokou closeness centralitou je schopné efektívne komunikovať s ostatnými letiskami.
+    
+    \item \textbf{Eigenvector Centrality ($C_E$)} -- hodnotí význam uzla na základe významu jeho susedných uzlov. 
+    Letisko s vysokou eigenvector centralitou je prepojené s inými významnými letiskami.
+    
+    \item \textbf{Katz Centrality ($C_K$)} -- rozširuje eigenvector centralitu o faktor útlmu, ktorý znižuje vplyv vzdialenejších uzlov. 
+    Letisko s vysokou Katz centralitou má výrazný vplyv na sieť aj nepriamo prostredníctvom vzdialenejších spojení.
+
+\end{itemize}
+
+\section{Kompozitné indexy (Vlastná analytická nadstavba)}
+\label{sec:indexy}
+
+V tejto sekcii definujeme vlastnú analytickú nadstavbu vo forme piatich kompozitných indexov. Hoci základné sieťové centrality poskytujú 
+dôležitý pohľad na dôležitosť uzlov, v komplexných sieťach sú tieto metriky často silne korelované. Použitie kompozitných indexov nám umožňuje 
+tieto metriky od seba štatisticky „odfiltrovať“ a identifikovať letiská, ktoré zastávajú špecifické strategické roly v globálnej infraštruktúre.
+
+\subsection{Global Hub Score (Celková systémová dominancia)}
+Tento index predstavuje normalizovaný aritmetický priemer všetkých piatich vypočítaných centralít. Slúži na identifikáciu „absolútnych“ lídrov 
+siete – uzlov, ktoré dominujú vo všetkých aspektoch konektivity, tranzitu aj prestíže.
+\[
+\text{Global Hub Score} = \frac{1}{5} (C_D + C_B + C_C + C_E + C_K)
+\]
+Uzly s vysokým skóre v tomto indexe tvoria chrbticu globálnej leteckej dopravy a sú kritické pre celkovú súdržnosť a odolnosť grafu.
+
+\subsection{Bridge Index (Strategické premostenie)}
+Index identifikuje uzly, ktoré vykazujú disproporčne vysokú mieru kontroly tranzitu vzhľadom na ich relatívne nízky počet priamych spojení. 
+Tieto uzly reprezentujú geografické alebo topologické „skratky“.
+\[
+\text{Bridge Index} = \frac{C_B}{C_D + \epsilon}
+\]
+Kde konštanta $\epsilon = 0,001$ zabezpečuje numerickú stabilitu pri delení. Vysoká hodnota indexu indikuje tzv. \textit{bottlenecks} 
+siete, ktoré sú kritické pre integritu najkratších ciest medzi kontinentmi.
+
+\subsection{Regional Index (Regionálna akumulácia)}
+Tento ukazovateľ izoluje uzly s vysokou lokálnou konektivitou, ktoré však nedisponujú globálnym tranzitným významom. Vysoká hodnota znamená, 
+že letisko slúži primárne ako regionálny zberný bod alebo cieľová destinácia.
+\[
+\text{Regional Index} = C_D - C_B
+\]
+Letiská s vysokým regionálnym indexom zvyšujú kapacitu a hustotu dopravy v rámci kontinentov, ale ich systémový vplyv na integritu globálnych 
+trás je nižší.
+
+\subsection{Prestige Index (Index sieťovej prestíže)}
+Index je navrhnutý na identifikáciu tzv. „elitných satelitov“. Ide o letiská, ktoré majú nízky celkový počet spojení, ale tieto spojenia smerujú 
+výhradne do najvýznamnejších svetových hubov.
+\[
+\text{Prestige Index} = \frac{C_E}{C_D + \epsilon}
+\]
+Vysoká hodnota Prestige Indexu naznačuje, že letisko je priamou bránou z periférie do jadra globálneho systému, čím získava vysokú topologickú 
+prestíž napriek svojej relatívne malej veľkosti.
+
+\subsection{Local Giant Index (Index vnútroštátnej dominancie)}
+Tento index meria rozdiel medzi priamou konektivitou (Degree) a globálnou prestížou (Eigenvector). Slúži na identifikáciu masívnych uzlov, 
+ktoré sú však napojené na veľký počet nízko významných (často vnútroštátnych) letísk.
+\[
+\text{Local Giant Index} = C_D - C_E
+\]
+Typickými predstaviteľmi sú veľké uzly vo vnútroštátnych sieťach (napr. USA alebo Čína), ktoré obsluhujú obrovské objemy dopravy, no v globálnom 
+„elitnom klube“ najprepojenejších medzinárodných hubov hrajú sekundárnu rolu.
+
+
+\section{Analýza primárnych centralít}
+
+Pred aplikáciou kompozitných indexov sme identifikovali desať najvýznamnejších uzlov pre každú z piatich základných metrík. 
+Tieto výsledky tvoria empirický základ pre našu funkčnú typológiu a odhaľujú dôležité rozdiely v charaktere jednotlivých letísk.
+
+\subsection{Porovnanie Top 10 uzlov podľa sieťových metrík}
+
+V tabuľke \ref{tab:top10_raw} uvádzame rebríčky letísk zoradené podľa jednotlivých centralít. Hodnoty predstavujú normalizované 
+skóre v rámci celého grafu.
+
+\begin{table}[h!]
+\centering
+\small
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c|l|l|l|l|l}
+\hline
+\textbf{\#} & \textbf{Degree ($C_D$)} & \textbf{Betweenness ($C_B$)} & \textbf{Eigenvector ($C_E$)} & \textbf{Closeness ($C_C$)} & \textbf{Katz ($C_K$)} \\ \hline
+1.  & Frankfurt (FRA) & Paris (CDG)       & Amsterdam (AMS) & Frankfurt (FRA) & Frankfurt (FRA) \\
+2.  & Paris (CDG)     & Los Angeles (LAX) & Frankfurt (FRA) & Paris (CDG)     & Amsterdam (AMS) \\
+3.  & Amsterdam (AMS) & Dubai (DXB)       & Paris (CDG)     & London (LHR)    & Paris (CDG)     \\
+4.  & Istanbul (IST)  & Anchorage (ANC)   & Munich (MUC)    & Dubai (DXB)     & Istanbul (IST)  \\
+5.  & Atlanta (ATL)   & Frankfurt (FRA)   & London (LHR)    & Amsterdam (AMS) & Munich (MUC)    \\
+6.  & Chicago (ORD)   & Beijing (PEK)     & Rome (FCO)      & Los Angeles (LAX)& Atlanta (ATL)   \\
+7.  & Beijing (PEK)   & Chicago (ORD)     & Barcelona (BCN) & New York (JFK)  & Beijing (PEK)   \\
+8.  & Munich (MUC)    & Toronto (YYZ)     & Istanbul (IST)  & Toronto (YYZ)   & Chicago (ORD)   \\
+9.  & Moscow (DME)    & Amsterdam (AMS)   & Zürich (ZRH)    & Istanbul (IST)  & London (LHR)    \\
+10. & Dallas (DFW)    & Istanbul (IST)    & Madrid (MAD)    & Munich (MUC)    & Dubai (DXB)     \\ \hline
+\end{tabular}
+}
+\caption{Porovnanie Top 10 globálnych letísk podľa štyroch primárnych centralít.}
+\label{tab:top10_raw}
+\end{table}
+
+\subsection{Interpretácia výsledkov}
+
+Výsledky ukazujú, že jednotlivé centrality zachytávajú odlišné aspekty významu uzlov v globálnej leteckej sieti. Hoci medzi metrikami 
+existuje určitá miera prekryvu, poradie letísk sa v jednotlivých rebríčkoch výrazne líši, čo naznačuje existenciu viacerých funkčných typov hubov.
+
+Najvýraznejšie postavenie v sieti dosahujú európske uzly, predovšetkým \textbf{Frankfurt (FRA)}, \textbf{Paris Charles de Gaulle (CDG)} 
+a \textbf{Amsterdam Schiphol (AMS)}. Tieto letiská sa opakovane objavujú medzi najvyššie hodnotenými uzlami naprieč všetkými centralitami, 
+čo potvrdzuje ich úlohu nielen ako veľkých dopravných centier ($C_D$), ale aj ako systémovo integrovaných uzlov s vysokou globálnou dostupnosťou 
+($C_C$) a prestížou ($C_E$).
+
+Významnú anomáliu predstavuje letisko \textbf{Anchorage (ANC)}, ktoré sa umiestnilo na štvrtom mieste v rámci \textit{Betweenness centrality}, 
+napriek tomu, že sa nevyskytuje v ostatných rebríčkoch Top 10. Tento výsledok naznačuje, že význam ANC nevyplýva z veľkého množstva spojení, 
+ale z jeho strategickej polohy na tranzitných trasách medzi Áziou a Severnou Amerikou. Letisko tak predstavuje typ uzla, ktorého dominantná 
+úloha spočíva v kontrole kritických najkratších ciest v sieti.
+
+Odlišný charakter vykazujú aj letiská ako \textbf{Atlanta (ATL)} alebo \textbf{Dallas/Fort Worth (DFW)}, ktoré dosahujú vysoké hodnoty 
+\textit{Degree centrality}, avšak absentujú medzi lídrami v rámci \textit{Eigenvector centrality}. To naznačuje, že ich konektivita je 
+orientovaná najmä na rozsiahle regionálne alebo vnútroštátne siete, pričom ich prepojenie na globálne dominantné huby je relatívne slabšie.
+
+Rebríček \textit{Katz centrality} vykazuje vysokú mieru podobnosti s \textit{Degree centrality}, avšak mierne zvýhodňuje uzly prepojené 
+s významnými susedmi. Najvyššiu hodnotu dosahuje \textbf{Frankfurt (FRA)}, čo potvrdzuje jeho stabilný systémový význam 
+aj v modeli zohľadňujúcom vzdialenejšie sieťové vplyvy.
+
+\subsection{Vizualizácia vzťahu Degree a Betweenness centrality}
+
+Hoci rebríčky v Tabuľke \ref{tab:top10_raw} identifikujú najvýznamnejšie uzly podľa jednotlivých metrík, neposkytujú úplný pohľad na 
+vzájomné vzťahy medzi konektivitou a tranzitným významom uzlov. Pre hlbšie pochopenie štrukturálnych rolí letísk sme preto zostavili 
+korelačný graf (Obr. \ref{fig:degree_vs_betweenness}), ktorý zobrazuje vzťah medzi priamou konektivitou uzla ($C_D$) a jeho tranzitným vplyvom ($C_B$).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{images/degree_vs_betw.png}
+    \caption{Vzťah medzi Degree centrality a Betweenness centrality pre uzly globálnej leteckej siete. Výrazné odchýlky od hlavného 
+    zhluku indikujú rozdielne funkčné roly letísk v sieti.}
+    \label{fig:degree_vs_betweenness}
+\end{figure}
+
+Graf odhaľuje výraznú heterogenitu funkčných rolí letísk v globálnej leteckej sieti. Väčšina uzlov je koncentrovaná v ľavej dolnej časti 
+grafu, čo naznačuje nízku konektivitu aj obmedzený tranzitný význam. Len malý počet letísk vystupuje ako systémovo dominantné uzly s vysokými 
+hodnotami oboch metrík.
+
+Výrazným outlierom je letisko \textbf{Ted Stevens Anchorage International Airport (ANC)}, ktoré sa nachádza izolovane v ľavej hornej časti grafu. 
+Napriek relatívne nízkej degree centralite dosahuje mimoriadne vysokú hodnotu \textit{Betweenness centrality}, čo potvrdzuje jeho úlohu strategického 
+tranzitného mosta medzi Áziou a Severnou Amerikou. ANC tak predstavuje typ uzla, ktorého význam nevyplýva z množstva spojení, ale z kontroly nad 
+kritickými najkratšími cestami v sieti.
+
+Naopak, letiská ako \textbf{Charles de Gaulle (CDG)}, \textbf{Frankfurt (FRA)} a \textbf{Amsterdam Schiphol (AMS)} sa nachádzajú v pravom hornom 
+rohu grafu, kde kombinujú vysokú mieru konektivity aj vysoký tranzitný význam. Tieto uzly tvoria jadro globálnej leteckej siete a predstavujú 
+systémovo najintegrovanejšie huby.
+
+Zaujímavú skupinu tvoria aj letiská ako \textbf{Beijing Capital International Airport (PEK)} a \textbf{Chicago O'Hare International Airport (ORD)}, 
+ktoré síce disponujú vysokou konektivitou, no v porovnaní s európskymi hubmi dosahujú nižšie hodnoty \textit{Betweenness centrality}. To naznačuje 
+odlišný charakter ich sieťovej funkcie, orientovaný viac na regionálnu distribúciu než na globálny tranzit.
+
+Tieto zistenia potvrdzujú, že jednotlivé centrality zachytávajú odlišné aspekty významu uzlov. Zároveň priamo zdôvodňujú potrebu zavedenia kompozitných 
+indexov (kapitola \ref{sec:indexy}), ktoré umožňujú oddeliť tranzitný význam, systémovú integráciu a samotnú konektivitu uzlov.
+
+\section{Analýza kompozitných indexov}
