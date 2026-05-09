@@ -78,26 +78,32 @@ hierarchiu (stupne) reálnych uzlov.
     \caption{Komplexné porovnanie sieťových štatistík reálnej siete a teoretických modelov.}
     \label{tab:model_comparison}
     \begin{tabular}{lccc}
-        \hline \textbf{Model siete}         & \textbf{Hrany $|E|$} & \textbf{Clustering ($C$)} & \textbf{Priem. cesta ($L$)} \\
+        \hline \textbf{Model siete}         & \textbf{Hrany $|E|$} & \textbf{Clustering ($C$)} & \textbf{Priem. cesta ($L$)} (V Giant Componente)\\
         \hline \textbf{Reálna letecká sieť} & \textbf{18 859}      & \textbf{0.4918}           & \textbf{3.9585}             \\
-        Erdős–Rényi (Náhodný)               & 18 859               & 0.0041                    & 3.5708                      \\
-        Barabási–Albert (Huby)              & 18 834               & 0.0201                    & 3.1644                      \\
-        Konfiguračný model                  & 17 893               & 0.0732                    & 3.3343                      \\
+        Erdős–Rényi (Náhodný)               & 18 859               & 0.0041                    & 2.5708                      \\
+        Barabási–Albert (Huby)              & 18 834               & 0.0201                    & 2.1644                      \\
+        Konfiguračný model                  & 17 893               & 0.0732                    & 2.3343                      \\
         \hline
     \end{tabular}
 \end{table}
 
-\subsection{Interpretácia a Small-World fenomén}
+\subsection*{Interpretácia a Small-World fenomén}
 
 Najvýraznejším zistením je prítomnosť \textbf{Small-world efektu}. Tento jav definujeme cez koexistenciu vysokého zhlukovania a krátkych priemerných
 vzdialeností. Dosiahnutý index \textbf{$\sigma \approx 108$} (vyjadrujúci pomer clusteringu k dĺžke cesty voči náhode) jasne klasifikuje letectvo ako
-vysoko efektívny systém. Pre hlbšiu validáciu sme vypočítali aj Telesfordov koeficient \textbf{$\omega \approx 0.21$}. Hodnota blízka nule potvrdzuje,
-že sieť sa nachádza v „zlatom strede“ medzi prísne usporiadanou mriežkou a úplným chaosom.
+vysoko efektívny systém. Pre hlbšiu validáciu sme vypočítali aj Telesfordov koeficient \textbf{$\omega \approx 0.21$} dosadením do následovnej rovnice
+\ref{eq:telesford}. Hodnota blízka nule zhora potvrdzuje, že sieť sa nachádza medzi „malým svetom“ a úplným chaosom. 
 
-V praxi to znamená, že napriek obrovským fyzickým vzdialenostiam žijeme vo „svete štyroch letov“. Priemerná dĺžka cesty $L \approx 3.96$ naznačuje, že
-globálna dostupnosť je zabezpečená pozoruhodne malým počtom krokov.
+\begin{equation}
+\omega = \frac{L_{rand}}{L} - \frac{C}{C_{latt}}
+\label{eq:telesford}
+\end{equation}
 
-\subsection{Zaujímavosti a štrukturálne postrehy}
+Kde $C_{latt}$ predstavuje zhlukový koeficient teoretického odhadu pre mriežkovú štruktúru. V praxi to znamená, že napriek obrovským fyzickým
+vzdialenostiam žijeme vo „svete štyroch letov“. Priemerná dĺžka cesty $L \approx 2.96$ naznačuje, že globálna dostupnosť je zabezpečená pozoruhodne
+malým počtom krokov.
+
+\subsection*{Zaujímavosti a štrukturálne postrehy}
 
 \begin{itemize}
     \item \textbf{Sila komunity vs. Sila hubov:} Konfiguračný model zachováva identickú veľkosť letísk ako realita, no napriek tomu vykazuje takmer
@@ -106,7 +112,7 @@ globálna dostupnosť je zabezpečená pozoruhodne malým počtom krokov.
     blízke regióny, nie len preto, že sú veľké.
 
     \item \textbf{Robustnosť „štyroch letov“:} Všimnime si, že priemerná dĺžka cesty $L$ sa naprieč všetkými modelmi (od náhody po realitu) mení len
-    minimálne (v rozsahu $3.1$ až $3.9$). To naznačuje, že nízky počet prestupov je \textbf{univerzálnou vlastnosťou} riedkych sietí s daným počtom
+    minimálne (v rozsahu $2.1$ až $2.9$). To naznačuje, že nízky počet prestupov je \textbf{univerzálnou vlastnosťou} riedkych sietí s daným počtom
     hrán. Realita je však o niečo menej efektívna než náhodné modely, čo je „daň“, ktorú platíme za fyzikálne obmedzenia planéty a nemožnosť spojiť
     každé dve letiská priamou čiarou.
 
@@ -114,7 +120,7 @@ globálna dostupnosť je zabezpečená pozoruhodne malým počtom krokov.
     ktoré sú napojené na rovnaký uzol, je takmer $50\,\%$ šanca, že sú prepojené aj medzi sebou. V náhodnom svete by táto šanca bola nižšia než
     $0.5\,\%$. Letecká sieť teda nie je pavučina, ale skôr \textbf{zhluk prepojených ostrovov}.
 
-    \item \textbf{Efektivita BA modelu:} Barabási–Albertov model vykazuje najnižšiu priemernú cestu ($3.16$). To naznačuje, že ak by sa svet riadil
+    \item \textbf{Efektivita BA modelu:} Barabási–Albertov model vykazuje najnižšiu priemernú cestu ($2.16$). To naznačuje, že ak by sa svet riadil
     čistou matematickou optimalizáciou bez ohľadu na štátne hranice a kontinenty, priemerný počet prestupov by klesol o ďalších $20\,\%$.
 \end{itemize}
 
