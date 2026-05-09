@@ -11,7 +11,7 @@ Základným kameňom analýzy je definícia orientovaného grafu $G = (V, E)$. M
 hrany $E \subseteq V \times V$ predstavujú priame letecké linky. Pre výpočtovú efektivitu využívame maticovú reprezentáciu v podobe matice susednosti
 $\mathbf{A} \in \mathbb{R}^{3214 \times 3214}$, kde prvok $\mathbf{A}_{i,j}$ nadobúda hodnotu geografickej vzdialenosti medzi letiskami $i$ a $j$.
 
-\section*{Globálne charakteristiky a hustota siete}
+\section{Globálne charakteristiky a hustota siete}
 Prvým zistením pri pohľade na globálnu sieť je jej extrémna riedkosť. Hustota siete, definovaná ako pomer existujúcich hrán k počtu
 všetkých možných spojení v kompletnom grafe, dosahuje hodnotu približne $0.00357$.
 
@@ -23,7 +23,7 @@ Tento výsledok potvrdzuje, že priamočiara dostupnosť medzi ľubovoľnými dv
 „riedkosti“ však sieť vykazuje vysokú mieru tranzitivity ($25.01\,\%$). To indikuje, že sieť nie je náhodná, ale je organizovaná do hustých klastrov
 – ak existuje spojenie z bodu A do B a z B do C, je $25\%$ šanca, že existuje aj priama linka A $\rightarrow$ C.
 
-\section*{Komponenty súvislosti a obria komponenta}
+\subsection{Komponenty súvislosti a obria komponenta}
 Letecký svet v našom modeli nie je dokonale jednotný. Identifikovali sme celkovo $7$ komponentov súvislosti. Avšak analýza ich veľkosti ukazuje na
 existenciu tzv. \textbf{Obrieho komponentu} (\textit{Giant Component}), ktorý v sebe pohlcuje až $99.19\,\%$ všetkých letísk ($3188$ uzlov).
 
@@ -43,7 +43,8 @@ Zistili sme, že izolácia v našom modeli nie je náhodná, ale viaže sa na š
 globálnej logistickej siete odrezané od hlavných hubov. Ide predovšetkým o vnútroštátne siete v \textbf{Namíbii}, \textbf{Grónsku} či špecifické
 regionálne okruhy v \textbf{USA} a \textbf{Kanade}. Tieto body predstavujú výzvu pre globálnu integritu siete.
 
-\section*{Distribúcia stupňov a globálna hierarchia}
+\subsection{Distribúcia stupňov a globálna hierarchia}
+\label{sek:stupne}
 Kľúčovým indikátorom charakteru reálnej siete je distribúcia stupňov jej vrcholov. Na rozdiel od náhodných grafov, kde majú uzly tendenciu mať podobný
 počet susedov, letecká sieť vykazuje extrémnu asymetriu. Priemerný stupeň vrchola v našej sieti je približne $22.97$, avšak medián na úrovni $6$
 naznačuje prítomnosť „ťažkého chvosta“ (\textit{heavy-tail}) v rozdelení.
@@ -86,7 +87,7 @@ hierarchiu (stupne) reálnych uzlov.
     \end{tabular}
 \end{table}
 
-\subsection*{Interpretácia a Small-World fenomén}
+\subsection{Interpretácia a Small-World fenomén}
 
 Najvýraznejším zistením je prítomnosť \textbf{Small-world efektu}. Tento jav definujeme cez koexistenciu vysokého zhlukovania a krátkych priemerných
 vzdialeností. Dosiahnutý index \textbf{$\sigma \approx 108$} (vyjadrujúci pomer clusteringu k dĺžke cesty voči náhode) jasne klasifikuje letectvo ako
@@ -96,7 +97,7 @@ vysoko efektívny systém. Pre hlbšiu validáciu sme vypočítali aj Telesfordo
 V praxi to znamená, že napriek obrovským fyzickým vzdialenostiam žijeme vo „svete štyroch letov“. Priemerná dĺžka cesty $L \approx 3.96$ naznačuje, že
 globálna dostupnosť je zabezpečená pozoruhodne malým počtom krokov.
 
-\subsection*{Zaujímavosti a štrukturálne postrehy}
+\subsection{Zaujímavosti a štrukturálne postrehy}
 
 \begin{itemize}
     \item \textbf{Sila komunity vs. Sila hubov:} Konfiguračný model zachováva identickú veľkosť letísk ako realita, no napriek tomu vykazuje takmer
@@ -122,7 +123,7 @@ Topologická štruktúra siete, ktorú sme v predchádzajúcej časti definovali
 jasné kontúry pri pohľade na priestorové rozdelenie dopravy. Naša analýza potvrdzuje, že globálne letectvo nie je homogénnym systémom, ale pozostáva
 z masívnych regionálnych podsystémov, ktoré dominujú predovšetkým na severnej pologuli.
 
-\subsection*{Vnútrokontinentálna dominancia a lokálne centrá}
+\subsection{Vnútrokontinentálna dominancia a lokálne centrá}
 Pri skúmaní vnútrokontinentálnej prevádzky (Obrázok \ref{fig:intra_map}) pozorujeme priepastné rozdiely v hustote prepojení medzi svetovými regiónmi.
 Severná pologuľa funguje ako motor globálnej konektivity, kde \textbf{Ázia (18 004 prepojení)}, \textbf{Európa (16 597)} a
 \textbf{Severná Amerika (15 844)} tvoria takmer uzavreté a vysoko redundantné ekosystémy. Tieto čísla ostro kontrastujú s južnou pologuľou a Afrikou,
@@ -142,7 +143,7 @@ regionálnych destinácií dostupná na jeden prestup.
     \label{fig:intra_map}
 \end{figure}
 
-\subsection*{Interkontinentálne magistrály: Mosty medzi svetmi}
+\subsection{Interkontinentálne magistrály: Mosty medzi svetmi}
 
 Zatiaľ čo tisíce lokálnych letov vytvárajú stabilitu a hustotu vnútri regiónov, globálnu integritu celého systému držia pohromade strategické
 interkontinentálne toky (Obrázok \ref{fig:inter_map}). Týchto $28$ hlavných magistrál funguje ako topologické „skratky“. Tie sú v konečnom dôsledku
