@@ -1,10 +1,8 @@
 \chapter[Analýza centralít \small{(Tuan Dávid Nguyen Van)}]{Analýza centralít}
 \label{centrality}
 
-V tejto kapitole sa zameriame na analýzu centralít v sieti letísk. 
-Centrality nám pomáhajú identifikovať kľúčové letiská, ktoré zohrávajú dôležitú úlohu v štruktúre siete a môžu 
-byť kritické pre jej fungovanie. Budeme sa venovať rôznym typom centralít, ako sú degree centrality, betweenness 
-centrality, closeness centrality, eigenvector centrality.
+Kapitola sa venuje analýze sieťových centralít v globálnej leteckej sieti, konkrétne degree, betweenness, closeness, eigenvector a Katz 
+centralite a ich využitiu na identifikáciu kľúčových uzlov
 
 
 \section{Metodológia a technické spracovanie}
@@ -51,9 +49,9 @@ Na kvantifikáciu dôležitosti uzlov sme aplikovali päť základných metrík,
 \section{Kompozitné indexy (Vlastná analytická nadstavba)}
 \label{sec:indexy}
 
-V tejto sekcii definujeme vlastnú analytickú nadstavbu vo forme piatich kompozitných indexov. Hoci základné sieťové centrality poskytujú 
-dôležitý pohľad na dôležitosť uzlov, v komplexných sieťach sú tieto metriky často silne korelované. Použitie kompozitných indexov nám umožňuje 
-tieto metriky od seba štatisticky „odfiltrovať“ a identifikovať letiská, ktoré zastávajú špecifické strategické roly v globálnej infraštruktúre.
+V tejto sekcii definujeme vlastnú analytickú nadstavbu vo forme piatich kompozitných indexov. Keďže základné centrality sú v komplexných 
+sieťach často silne korelované, zavádzame päť kompozitných indexov, ktoré ich štatisticky odfiltrujú a odhalia špecifické strategické roly 
+jednotlivých letísk.
 
 \subsection{Global Hub Score (Celková systémová dominancia)}
 Tento index predstavuje normalizovaný aritmetický priemer všetkých piatich vypočítaných centralít. Slúži na identifikáciu „absolútnych“ lídrov 
@@ -187,9 +185,6 @@ Zaujímavú skupinu tvoria aj letiská ako \textbf{Beijing Capital International
 ktoré síce disponujú vysokou konektivitou, no v porovnaní s európskymi hubmi dosahujú nižšie hodnoty \textit{Betweenness centrality}. To naznačuje 
 odlišný charakter ich sieťovej funkcie, orientovaný viac na regionálnu distribúciu než na globálny tranzit.
 
-Tieto zistenia potvrdzujú, že jednotlivé centrality zachytávajú odlišné aspekty významu uzlov. Zároveň priamo zdôvodňujú potrebu zavedenia kompozitných 
-indexov (kapitola \ref{sec:indexy}), ktoré umožňujú oddeliť tranzitný význam, systémovú integráciu a samotnú konektivitu uzlov.
-
 \section{Analýza kompozitných indexov}
 
 \subsection{Globálne systémové huby}
@@ -289,8 +284,8 @@ husté siete typu bod-bod (point-to-point).
 
 Z hľadiska sieťovej topológie tieto uzly fungujú ako „akumulátory“ – miesta, kde sa doprava sústreďuje, ale nepokračuje ďalej pri letoch medzi 
 kontinentálnymi blokmi. Príkladom sú letiská \textbf{Barcelona International Airport} a \textbf{Palma De Mallorca Airport}, ktoré vykazujú vysokú 
-mieru konektivity naviazanú na cestovný ruch. Hoci sú tieto letiská kľúčové pre ekonomickú stabilitu a mobilitu v rámci Európy, ich strategický 
-význam pre globálnu tranzitnú integritu je v porovnaní s uzlami typu „Bridge“ (napr. Anchorage) výrazne nižší.
+mieru konektivity naviazanú na cestovný ruch. Hoci sú tieto letiská kľúčové pre ekonomickú stabilitu a mobilitu v rámci Európy, ich globálny tranzitný 
+dosah je v porovnaní s uzlami typu Bridge výrazne nižší.
 
 
 \subsection{Vnútroštátni giganti}
@@ -326,7 +321,7 @@ s rozsiahlou geografickou rozlohou a silným domácim trhom, konkrétne \textbf{
 Letiská ako \textbf{Hartsfield Jackson Atlanta International Airport} alebo \textbf{Beijing Capital International Airport} obsluhujú extrémne 
 množstvo spojení, čo ich radí na vrchol svetových rebríčkov v počte letov. Avšak ich nižšia hodnota v rámci \textit{Eigenvector centrality} 
 (prestíže) v porovnaní s európskymi hubmi naznačuje, že veľká časť ich siete je uzavretá vnútri národných systémov. Tieto uzly sú kľúčové pre 
-ekonomickú stabilitu svojich krajín, no v globálnej topológii fungujú skôr ako masívne izolované distribútory než ako primárne body svetovej prestíže.
+ekonomickú stabilitu svojich krajín.
 
 
 \subsection{Exkluzívne satelitné uzly}
