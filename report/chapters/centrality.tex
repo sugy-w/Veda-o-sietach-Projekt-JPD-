@@ -176,7 +176,7 @@ hodnotami oboch metrík.
 
 Výrazným outlierom je letisko \textbf{Ted Stevens Anchorage International Airport}, ktoré sa nachádza izolovane v ľavej hornej časti grafu. 
 Napriek relatívne nízkej degree centralite dosahuje mimoriadne vysokú hodnotu \textit{Betweenness centrality}, čo potvrdzuje jeho úlohu strategického 
-tranzitného mosta medzi Áziou a Severnou Amerikou. ANC tak predstavuje typ uzla, ktorého význam nevyplýva z množstva spojení, ale z kontroly nad 
+tranzitného mosta medzi Áziou a Severnou Amerikou. Anchorage tak predstavuje typ uzla, ktorého význam nevyplýva z množstva spojení, ale z kontroly nad 
 kritickými najkratšími cestami v sieti.
 
 Naopak, letiská ako \textbf{Charles de Gaulle}, \textbf{Frankfurt} a \textbf{Amsterdam Schiphol} sa nachádzajú v pravom hornom 
@@ -190,3 +190,177 @@ odlišný charakter ich sieťovej funkcie, orientovaný viac na regionálnu dist
 Tieto zistenia potvrdzujú, že jednotlivé centrality zachytávajú odlišné aspekty významu uzlov. Zároveň priamo zdôvodňujú potrebu zavedenia kompozitných 
 indexov (kapitola \ref{sec:indexy}), ktoré umožňujú oddeliť tranzitný význam, systémovú integráciu a samotnú konektivitu uzlov.
 
+\section{Analýza kompozitných indexov}
+
+\subsection{Globálne systémové huby}
+
+Na základe kompozitného indexu \textit{Global Hub Score} sme identifikovali uzly s najvyššou mierou systémovej dôležitosti. Tieto letiská predstavujú 
+kritickú infraštruktúru, pričom ich dominancia je stabilná naprieč viacerými metrikami.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{cllc}
+\hline
+\textbf{Poradie} & \textbf{Názov letiska} & \textbf{Lokalita} \\ \hline
+1. & Charles de Gaulle International Airport & Paríž, FR \\
+2. & Frankfurt am Main Airport & Frankfurt, DE \\
+3. & Amsterdam Airport Schiphol & Amsterdam, NL \\
+4. & Atatürk International Airport & Istanbul, TR \\
+5. & Dubai International Airport & Dubaj, AE \\
+6. & London Heathrow Airport & Londýn, GB \\
+7. & Beijing Capital International Airport & Peking, CN \\
+8. & Chicago O'Hare International Airport & Chicago, US \\
+9. & Munich Airport & Mníchov, DE \\
+10. & Los Angeles International Airport & Los Angeles, US \\ \hline
+\end{tabular}
+\caption{Top 10 letísk podľa Global Hub Score (všestranná sieťová dominancia).}
+\label{tab:top10_global_hubs}
+\end{table}
+
+V prvej desiatke dominuje európsky región (6 z 10 letísk). Významné je 
+zastúpenie letiska v Dubaji, ktoré vďaka svojej strategickej polohe medzi Európou a Áziou maximalizuje tranzitný potenciál napriek menšiemu 
+vnútroštátnemu trhu v porovnaní s americkými letiskami.
+
+
+\subsection{Strategické premostenie}
+
+Výsledky aplikácie \textit{Bridge Indexu} (Tabuľka \ref{tab:bridge_index}) odhaľujú konkrétne uzly, ktoré fungujú ako kritické úzke hrdlá siete.
+Tento index zvýrazňuje uzly, ktoré pri nízkom počte spojení kontrolujú disproporčne veľké množstvo tranzitných trás. Tieto letiská predstavujú 
+miesta, kde je sieť najviac zraniteľná.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{cll}
+\hline
+\textbf{Poradie} & \textbf{Názov letiska} & \textbf{Región} \\ \hline
+1. & Ted Stevens Anchorage & Aljaška, USA \\
+2. & Minaçu Airport & Brazília \\
+3. & Thunder Bay Airport & Ontário, Kanada \\
+4. & Bangoka International & DR Kongo \\
+5. & Fort Albany Airport & Ontário, Kanada \\
+6. & Norman Wells Airport & SZ Teritóriá, Kanada \\
+7. & Kangerlussuaq Airport & Grónsko \\
+8. & Moosonee Airport & Ontário, Kanada \\ \hline
+\end{tabular}
+\caption{Top letiská podľa Bridge Indexu (Kritické sieťové mosty).}
+\label{tab:bridge_index}
+\end{table}
+
+Analýza \textit{Bridge Indexu} identifikovala dve fundamentálne odlišné skupiny uzlov. Prvou sú globálne tranzitné mosty ako \textbf{Anchorage} 
+a \textbf{Kangerlussuaq}, ktoré slúžia ako nevyhnutné technické zastávky pre transkontinentálne lety. 
+
+Druhú, početnejšiu skupinu, tvoria letiská v odľahlých oblastiach Kanady, Brazílie a Afriky (napr. \textbf{Fort Albany} alebo \textbf{Minaçu}). Tieto uzly 
+reprezentujú kritické body, ktorých výpadok by viedol k úplnej izolácii priľahlých komunít. Ich vysoký 
+index je daný tým, že sú jediným prístupovým bodom do rozsiahlych geografických oblastí, čo z nich robí strategické priority z hľadiska národnej 
+infraštruktúry.
+
+
+\subsection{Regionálne centrá a akumulátory (Regional Index)}
+
+Analýza regionálnej akumulácie (Tabuľka \ref{tab:regional_index_results}) ukazuje dominanciu európskych uzlov.
+Tieto letiská disponujú extrémnym počtom linkových  spojení, ktoré však nie sú nevyhnutné pre globálnu integritu transkontinentálnych trás.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{cll}
+\hline
+\textbf{Poradie} & \textbf{Názov letiska} & \textbf{Lokalita} \\ \hline
+1. & London Stansted Airport & Londýn, GB \\
+2. & Munich Airport & Mníchov, DE \\
+3. & Düsseldorf Airport & Düsseldorf, DE \\
+4. & London Gatwick Airport & Londýn, GB \\
+5. & Barcelona International Airport & Barcelona, ES \\
+6. & Vienna International Airport & Viedeň, AT \\
+7. & Manchester Airport & Manchester, GB \\
+8. & Brussels Airport & Brusel, BE \\
+9. & Dublin Airport & Dublin, IE \\
+10. & Palma De Mallorca Airport & Palma de Mallorca, ES \\ \hline
+\end{tabular}
+\caption{Top 10 letísk podľa Regional Indexu.}
+\label{tab:regional_index_results}
+\end{table}
+
+V tejto kategórii dominuje európsky kontinent, ktorý v prvej stovke najvýznamnejších regionálnych centier zastupuje až 56 \% uzlov. Vysoké hodnoty 
+letísk ako \textbf{London Stansted Airport} alebo \textbf{London Gatwick Airport} sú výsledkom stratégie nízkonákladových dopravcov, ktorí budujú 
+husté siete typu bod-bod (point-to-point). 
+
+Z hľadiska sieťovej topológie tieto uzly fungujú ako „akumulátory“ – miesta, kde sa doprava sústreďuje, ale nepokračuje ďalej pri letoch medzi 
+kontinentálnymi blokmi. Príkladom sú letiská \textbf{Barcelona International Airport} a \textbf{Palma De Mallorca Airport}, ktoré vykazujú vysokú 
+mieru konektivity naviazanú na cestovný ruch. Hoci sú tieto letiská kľúčové pre ekonomickú stabilitu a mobilitu v rámci Európy, ich strategický 
+význam pre globálnu tranzitnú integritu je v porovnaní s uzlami typu „Bridge“ (napr. Anchorage) výrazne nižší.
+
+
+\subsection{Vnútroštátni giganti}
+
+Index vnútroštátnej dominancie izoluje letiská, ktoré disponujú masívnou priamou konektivitou, no ich prepojenie na globálne „elitné“ 
+jadro siete je relatívne slabšie. Tento ukazovateľ identifikuje uzly, ktoré profitujú z obrovských vnútroštátnych trhov, pričom ich topologický vplyv
+ na medzinárodnú prestíž systému je v porovnaní s ich veľkosťou sekundárny.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{cll}
+\hline
+\textbf{Poradie} & \textbf{Názov letiska} & \textbf{Lokalita} \\ \hline
+1. & Hartsfield Jackson Atlanta International Airport & Atlanta, US \\
+2. & Denver International Airport & Denver, US \\
+3. & Dallas Fort Worth International Airport & Dallas/Fort Worth, US \\
+4. & Guangzhou Baiyun International Airport & Guangzhou, CN \\
+5. & Beijing Capital International Airport & Peking, CN \\
+6. & Domodedovo International Airport & Moskva, RU \\
+7. & Chicago O'Hare International Airport & Chicago, US \\
+8. & George Bush Intercontinental Houston Airport & Houston, US \\
+9. & Kunming Changshui International Airport & Kunming, CN \\
+10. & Chengdu Shuangliu International Airport & Chengdu, CN \\ \hline
+\end{tabular}
+\caption{Top 10 letísk podľa Local Giant Indexu.}
+\label{tab:local_giant_index}
+\end{table}
+
+Výsledky tohto indexu odhaľujú zásadný rozdiel medzi objemom konektivity a globálnou prestížou. V rebríčku dominujú výhradne letiská z krajín 
+s rozsiahlou geografickou rozlohou a silným domácim trhom, konkrétne \textbf{Čína (33 letísk v Top 100)} a \textbf{Spojené štáty (24 letísk v Top 100)}. 
+
+Letiská ako \textbf{Hartsfield Jackson Atlanta International Airport} alebo \textbf{Beijing Capital International Airport} obsluhujú extrémne 
+množstvo spojení, čo ich radí na vrchol svetových rebríčkov v počte letov. Avšak ich nižšia hodnota v rámci \textit{Eigenvector centrality} 
+(prestíže) v porovnaní s európskymi hubmi naznačuje, že veľká časť ich siete je uzavretá vnútri národných systémov. Tieto uzly sú kľúčové pre 
+ekonomickú stabilitu svojich krajín, no v globálnej topológii fungujú skôr ako masívne izolované distribútory než ako primárne body svetovej prestíže.
+
+
+\subsection{Exkluzívne satelitné uzly}
+
+Index sieťovej prestíže identifikuje takzvané „elitné satelity“. Ide o letiská, ktoré disponujú veľmi nízkym počtom priamych spojení, avšak tieto 
+spojenia smerujú výhradne do najvýznamnejších globálnych hubov. Vysoká hodnota tohto indexu naznačuje, že uzol je napriek svojej malej fyzickej 
+veľkosti priamou bránou do jadra globálneho systému.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{cll}
+\hline
+\textbf{Poradie} & \textbf{Názov letiska} & \textbf{Lokalita} \\ \hline
+1. & Filippos Airport & Kozani, GR \\
+2. & Bolzano Airport & Bolzano, IT \\
+3. & Salamanca Airport & Salamanca, ES \\
+4. & Burgos Airport & Burgos, ES \\
+5. & Leon Airport & León, ES \\
+6. & Kastamonu Airport & Kastamonu, TR \\
+7. & Nakhchivan Airport & Nachičevan, AZ \\
+8. & Süleyman Demirel International Airport & Isparta, TR \\
+9. & Mihail Kogălniceanu International Airport & Konstanca, RO \\
+10. & Zafer Airport & Kütahya/Zafer, TR \\ \hline
+\end{tabular}
+\caption{Top 10 letísk podľa Prestige Indexu.}
+\label{tab:prestige_index}
+\end{table}
+
+V rebríčku Prestige Indexu absolútne dominuje \textbf{Európa (74 letísk v Top 100)}. Tento výsledok reflektuje špecifickú štruktúru európskeho letectva, 
+kde aj veľmi malé regionálne letiská (napríklad v Grécku, Taliansku alebo Španielsku) disponujú priamymi linkami do kľúčových metropol ako Frankfurt, 
+Paríž alebo Londýn.
+
+Letiská ako \textbf{Bolzano Airport} alebo \textbf{Salamanca Airport} majú minimálnu \textit{Degree centralitu}, čo znamená, že obsluhujú len zlomok 
+destinácií v porovnaní s veľkými hubmi. Avšak vďaka tomu, že ich jediní susedia v grafe sú uzly s najvyššou \textit{Eigenvector centralitou}, získavajú 
+tieto satelity vysokú mieru topologickej prestíže. Z hľadiska sieťovej stratégie tieto body predstavujú efektívne kanály, ktoré umožňujú rýchly prístup 
+z hlbokej periférie priamo do centra svetového diania bez potreby viacerých prestupov v rámci regionálnej siete.
